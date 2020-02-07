@@ -32,8 +32,8 @@ public class UF2ACT1 {
 
 					System.out.println("NUM INCORRECTE\n1 Inserta\n2 Modifica\n3 Esborra");
 					seleccio = teclado.nextInt();
-					teclado.nextLine();
 				}
+				teclado.nextLine();
 
 
 				if (seleccio == 0) {
@@ -61,31 +61,31 @@ public class UF2ACT1 {
 					String poblacio = teclado.nextLine();
 					
 					try {
-						stmt.execute("INSERT INTO alumnes VALUES (" + nom + "," + dni + "," + fecha + "," + adreca + "," + codiPostal + "," + poblacio + ")");
+						stmt.execute("INSERT INTO alumnes VALUES ('" + nom + "','" + dni.toString() + "','" + fecha + "','" + adreca + "'," + codiPostal + ",'" + poblacio + "')");
 					} catch (MySQLIntegrityConstraintViolationException e) {
 						System.out.println("No existeix el codi postal");
 					}
 				} else if (seleccio == 2) {
 					
 					System.out.println("Inserta el dni (9caracteres) del alumne que vols editar");
-					String condicion = teclado.nextLine();
+					String condicion = "'" + teclado.nextLine() + "'";
 					
 					System.out.println("Inserta el nom:");
 					String parametros = teclado.nextLine();
 					
 					System.out.println("Inserta la fecha (yyyy-mm-dd)");
-					parametros += ", fecha = " + teclado.nextLine();
+					parametros += "', dataNaixement = '" + teclado.nextLine();
 
 					System.out.println("Inserta la adreça");
-					parametros += ", adrecaPostal = " + teclado.nextLine();
+					parametros += "', adrecaPostal = '" + teclado.nextLine();
 
 					System.out.println("Inserta el codi postal (10 caracters maxim)");
-					parametros += ", codiPostal = " + teclado.nextLine();
+					parametros += "', codiPostal = " + teclado.nextLine();
 					
 					System.out.println("Inserta la poblacio");
-					parametros += ", poblacio = " + teclado.nextLine();
+					parametros += ", poblacio = '" + teclado.nextLine();
 					
-					stmt.execute("UPDATE alumnes SET name = " + parametros + " WHERE dni = " + condicion);
+					stmt.execute("UPDATE alumnes SET nom = '" + parametros + "' WHERE dni = " + condicion);
 				}
 				
 			}
